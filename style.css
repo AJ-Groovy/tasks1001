@@ -1,0 +1,16 @@
+table {
+    border-spacing: unset;
+}
+
+td, th {
+    padding: 20px 40px;
+    border: 1px solid black;
+}
+
+thead tr {
+    background: #aaa; 
+}
+
+tbody tr:nth-child(2n) {
+    background: #ddd;
+}
