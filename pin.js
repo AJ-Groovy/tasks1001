@@ -1,23 +1,31 @@
-let pinCheckerInit = (pin, maxAttempts, attempt = 1) => {
-    let input = prompt('Enter pin (4 digits)', '0000');
-    let pinChecker = (input) => {
-        const code = pin;
-        if (input == code) {
+let pinCheckerInit = (pin, maxAttempts) => {
+    let attemptsLeft = maxAttempts,
+        code = pin;
+
+    return (newPin) => {
+        if (newPin == code) {
             console.log('Access granted');
             return true
         } else {
-            console.log(`Incorrect pin, attempts left ${maxAttempts - attempt}`);
-            attempt++;
-            pinCheckerInit(pin, maxAttempts, attempt);
-        }
-    };
-    if (attempt <= maxAttempts) {
-        pinChecker(input)
-    } else {
-        console.log('Access denied. All attempts were used');
-        return false
-    };
+            
+            if (attemptsLeft == 0) {
+                console.log('Access denied. No attempts left');
+                return false;
+            }
 
+            console.log(`Incorrect pin. Available attempts: ${attemptsLeft - 1}`);
+            attemptsLeft--;
+            return false;
+        };
+    }
 };
 
-pinCheckerInit(1235, 5);
+let att1 = pinCheckerInit(1235, 5);
+att1(1231);
+att1(1231);
+att1(1231);
+att1(1231);
+att1(1231);
+att1(1231);
+att1(1231);
+att1(1231);
